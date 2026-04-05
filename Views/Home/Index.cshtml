@@ -1,0 +1,64 @@
+@model Lab06.ViewModels.HomeViewModel
+
+<div class="text-center mb-5">
+    <h1 class="display-4 fw-bold">News Portal</h1>
+    <p class="lead text-muted">Cele mai recente știri și articole</p>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card text-center border-primary">
+            <div class="card-body">
+                <h2 class="card-title text-primary">@Model.TotalArticles</h2>
+                <p class="card-text text-muted">Articole publicate</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card text-center border-success">
+            <div class="card-body">
+                <h2 class="card-title text-success">@Model.TotalCategories</h2>
+                <p class="card-text text-muted">Categorii</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2 class="mb-3">Cele mai recente articole</h2>
+
+<div class="row row-cols-1 row-cols-md-3 g-4 mb-4">
+    @foreach (var article in Model.LatestArticles)
+    {
+        <div class="col">
+            <div class="card h-100" style="cursor: pointer;">
+                @if (article.ImagePath != null)
+                {
+                    <img src="@article.ImagePath" class="card-img-top" alt="@article.Title"
+                         style="height: 200px; object-fit: cover;" />
+                }
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">
+                        <a asp-controller="Articles" asp-action="Details" asp-route-id="@article.Id"
+                           class="stretched-link text-decoration-none text-dark">@article.Title</a>
+                    </h5>
+                    <p class="card-text">
+                        @(article.Content.Length > 100
+                            ? article.Content[..100] + "..."
+                            : article.Content)
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted fst-italic">
+                        @article.CategoryName — @article.PublishedAt.ToShortDateString()
+                    </small>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="text-center">
+    <a asp-controller="Articles" asp-action="Index" class="btn btn-primary btn-lg">
+        Vezi toate articolele →
+    </a>
+</div>

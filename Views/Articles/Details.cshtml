@@ -1,0 +1,16 @@
+@model Lab06.ViewModels.ArticleViewModel
+
+<h1>@Model.Title</h1>
+@if (Model.ImagePath != null)
+{
+    <img src="@Model.ImagePath"
+         alt="@Model.Title"
+         class="img-fluid rounded mb-3"
+         style="max-height: 400px; object-fit: cover; width: 100%;" />
+}
+
+<p><strong>Category:</strong> @Model.CategoryName</p>
+<p><strong>Data publicării:</strong> @Model.PublishedAt.ToShortDateString()</p>
+<p>@Model.Content</p>
+
+<a asp-action="Index">← Înapoi la listă</a>

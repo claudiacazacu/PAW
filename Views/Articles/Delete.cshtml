@@ -1,0 +1,19 @@
+@model Lab06.ViewModels.ArticleViewModel
+
+<h1>Ștergere articol</h1>
+
+<p>Sigur doriți să ștergeți acest articol?</p>
+
+<div class="mb-3">
+    <h3>@Model.Title</h3>
+    <p><strong>Categorie:</strong> @Model.CategoryName</p>
+    <p><strong>Data:</strong> @Model.PublishedAt.ToShortDateString()</p>
+    <p>@Model.Content</p>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Confirmă ștergerea</button>
+</form>
+
+<a asp-action="Index">← Înapoi la listă</a>
